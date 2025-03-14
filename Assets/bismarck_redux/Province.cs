@@ -12,7 +12,7 @@ namespace bismarck_redux{
         /// <summary>
         /// The location of a city center.
         /// </summary>
-        public Vector2 CityCenter;
+        public Vector3 CityCenter;
 
         /// <summary>
         /// Neighboring provinces.
@@ -24,7 +24,7 @@ namespace bismarck_redux{
         /// </summary>
         public List<Vector2> Borders;
 
-        public Province(Vector2 city)
+        public Province(Vector3 city)
         {
             CityCenter = city;
             Neighbors = new List<Province>();

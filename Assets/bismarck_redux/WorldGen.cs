@@ -2,6 +2,7 @@
 using UnityUtilities.DelaunayVoronoi;
 using UnityUtilities.PoissonSampling;
 using UnityEngine;
+using UnityUtilities.General;
 
 namespace bismarck_redux
 {
@@ -39,7 +40,9 @@ namespace bismarck_redux
             foreach (var city in points)
             {
                 Vector2 nc = new Vector2((float)city.X, (float)city.Y);
-                provs.Add(city, new Province(nc));
+                /* Compute a height too */
+                var height = Mathf.PerlinNoise(nc.x/5.0f, nc.y/5.0f);
+                provs.Add(city, new Province(nc.ToVector3(height + 1.0f)));
             }
             
             /* Assign borders */

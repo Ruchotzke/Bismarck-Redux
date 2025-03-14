@@ -13,6 +13,8 @@ public class TestRun : MonoBehaviour
     private List<Province> _provinces;
 
     public MeshFilter pf_Mesh;
+
+    public LineRenderer pf_LineRenderer;
     
     // Start is called before the first frame update
     void Start()
@@ -25,9 +27,9 @@ public class TestRun : MonoBehaviour
         {
             var instance = Instantiate(pf_Mesh);
 
-            Mesher mesher = new Mesher();
+            Mesher mesher = new Mesher(false);
             Color provColor = Color.HSVToRGB(Random.Range(0.0f, 1.0f), 1.0f, 1.0f, true);
-            float height = Random.Range(0.0f, .5f);
+            float height = province.CityCenter.y;
             
             /* Triangulate the top */
             for (int i = 1; i < province.Borders.Count - 1; i++)
@@ -47,5 +49,30 @@ public class TestRun : MonoBehaviour
 
             instance.mesh = mesher.GenerateMesh();
         }
+        
+        // /* Connect up adjacent provinces */
+        // var closed = new HashSet<Province>();
+        // var open = new List<Province>();
+        // open.Add(_provinces[0]);
+        // while (open.Count > 0)
+        // {
+        //     var next = open[0];
+        //     closed.Add(next);
+        //     open.Remove(next);
+        //     foreach (var neighbor in next.Neighbors)
+        //     {
+        //         if (closed.Contains(neighbor) || open.Contains(neighbor))
+        //         {
+        //             continue;
+        //         }
+        //         
+        //         /* Draw this connection */
+        //         var instance = Instantiate(pf_LineRenderer);
+        //         instance.SetPositions(new[]{next.CityCenter, neighbor.CityCenter});
+        //         
+        //         /* Add this node to the open list */
+        //         open.Add(neighbor);
+        //     }
+        // }
     }
 }

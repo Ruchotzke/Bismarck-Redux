@@ -29,14 +29,20 @@ namespace UnityUtilities.Meshing
         /// The indices of this mesh.
         /// </summary>
         private List<int> indices;
+
+        /// <summary>
+        /// Whether or not duplicate vertices should be merged.
+        /// </summary>
+        private bool mergeVerts;
         
         /// <summary>
         /// Create a new mesher object.
         /// </summary>
-        public Mesher()
+        public Mesher(bool mergeVerts)
         {
             vertexAttributes = new List<VertexAttr>();
             indices = new List<int>();
+            this.mergeVerts = mergeVerts;
         }
 
         /// <summary>
@@ -46,6 +52,8 @@ namespace UnityUtilities.Meshing
         /// <returns></returns>
         private int CheckForDuplicate(Vector3 position)
         {
+            if (!mergeVerts) return -1;
+            
             for (int i = 0; i < vertexAttributes.Count; i++)
             {
                 if (vertexAttributes[i].Position == position) return i;

@@ -457,6 +457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pf_Mesh: {fileID: 4432332335791147992, guid: 553f3b08390126a4c843ddf65f7fe6e5, type: 3}
+  pf_LineRenderer: {fileID: 7909779166763441989, guid: 36a5315ef0c802f408df2a5b4e3abf28,
+    type: 3}
 --- !u!4 &1266812131
 Transform:
   m_ObjectHideFlags: 0
