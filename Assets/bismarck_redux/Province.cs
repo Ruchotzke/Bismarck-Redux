@@ -35,6 +35,7 @@ namespace bismarck_redux{
             CityCenter = city;
             Neighbors = new List<Province>();
             Borders = new List<Vector2>();
+            Pops = new PopContainer();
         }
 
         /// <summary>

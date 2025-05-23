@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace bismarck_redux.population
@@ -23,10 +24,11 @@ namespace bismarck_redux.population
         /// <param name="pop"></param>
         /// <param name="matching"></param>
         /// <returns></returns>
-        public bool TryGetPop(Pop pop, out Pop matching)
+        public bool TryGetPop(Pop pop, out Nullable<Pop> matching)
         {
-            if (_pops.TryGetValue(pop, out matching))
+            if (_pops.TryGetValue(pop, out Pop found))
             {
+                matching = found; 
                 return true;
             }
             else
@@ -37,19 +39,30 @@ namespace bismarck_redux.population
         }
 
         /// <summary>
+        /// Update the pop contained within this.
+        /// </summary>
+        /// <param name="replacement"></param>
+        /// <returns></returns>
+        private bool UpdatePop(Pop replacement)
+        {
+            if (!_pops.Contains(replacement)) return false;
+
+            _pops.Remove(replacement);
+            _pops.Add(replacement);
+            
+            return true;
+        }
+
+        /// <summary>
         /// Insert this pop or find a match and update the size.
         /// </summary>
         /// <param name="pop"></param>
         public void InsertOrUpdatePop(Pop pop)
         {
-            if (this.TryGetPop(pop, out Pop toUpdate))
-            {
-                toUpdate.Size += pop.Size;
-            }
-            else
+            if (!UpdatePop(pop))
             {
                 _pops.Add(pop);
-            }
+            } 
         }
 
         /// <summary>

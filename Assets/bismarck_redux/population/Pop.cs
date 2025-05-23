@@ -5,12 +5,12 @@ namespace bismarck_redux.population
     /// <summary>
     /// A representation of a single unit of population.
     /// </summary>
-    public class Pop : ICloneable
+    public struct Pop
     {
         /// <summary>
         ///  THe number of pops in this group.
         /// </summary>
-        public double Size;
+        public readonly double Size;
 
         /// <summary>
         /// The profession of this group of pops.
@@ -24,11 +24,6 @@ namespace bismarck_redux.population
         public override int GetHashCode()
         {
             return HashCode.Combine(Profession);
-        }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone(); 
         }
     } 
 }

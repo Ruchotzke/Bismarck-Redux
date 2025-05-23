@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using bismarck_redux.population;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace bismarck_redux.world
 {
@@ -19,7 +20,7 @@ namespace bismarck_redux.world
         /// <summary>
         /// All provinces in this game world.
         /// </summary>
-        public List<Province> provinces = new List<Province>();
+        public List<Province> Provinces;
 
         private void Awake()
         {
@@ -29,14 +30,19 @@ namespace bismarck_redux.world
             
             /* Generate the world */
             WorldGen wg = new WorldGen();
-            provinces = wg.Generate(new Rect(0.0f, 0.0f, 30.0f, 20.0f), 1.0f);
-            Debug.Log("Generated " + provinces.Count + " provinces");
+            Provinces = wg.Generate(new Rect(0.0f, 0.0f, 30.0f, 20.0f), 1.0f);
+            Debug.Log("Generated " + Provinces.Count + " provinces");
             
             /* Initialize population */
             var template = new Pop()
             {
                 Size = 30.0,
             };
+            foreach (var prov in Provinces)
+            {
+                prov.Pops.InsertOrUpdatePop(template);
+                prov.Pops.DeltaPopulation(template, Random.Range(-20.0f, 20.0f));
+            }
             
         }
     }

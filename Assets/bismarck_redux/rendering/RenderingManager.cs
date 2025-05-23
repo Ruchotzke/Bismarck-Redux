@@ -35,7 +35,7 @@ namespace bismarck_redux.rendering
             var worldManager = WorldManager.Instance;
              
             /* Render each province */
-            foreach (var province in worldManager.provinces)
+            foreach (var province in worldManager.Provinces)
             {
                 var instance = Instantiate(pf_Mesh, transform);
                 instance.gameObject.name = province.CityCenter.ToString();
